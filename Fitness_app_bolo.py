@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import *
 
 def calculate_bmi():
     weight_kg = float(weight_entry.get())
@@ -33,13 +34,6 @@ def calculate_daily_calorie_needs():
     else:
         calorie_needs_label.config(text="Your daily calorie needs for weight loss are: {:.2f}".format(daily_calorie_needs))
 
-def reuse():
-    question = tk.messagebox.askquestion("Confirmation", "Do you want to use the app again?")
-    if question == "yes":
-        clear_entries()
-    else:
-        root.destroy()
-
 def clear_entries():
     weight_entry.delete(0, tk.END)
     height_entry.delete(0, tk.END)
@@ -51,6 +45,10 @@ def clear_entries():
     bmr_label.config(text="")
     tdee_label.config(text="")
     calorie_needs_label.config(text="")
+
+
+
+
 
 root = tk.Tk()
 root.title("Fitness App")
@@ -101,137 +99,9 @@ tdee_button = tk.Button(root, text="Calculate TDEE", command=calculate_tdee)
 tdee_button.grid(row=5, column=2)
 calorie_needs_button = tk.Button(root, text="Calculate Daily Calorie Needs", command=calculate_daily_calorie_needs)
 calorie_needs_button.grid(row=3, column=2)
-reuse_button = tk.Button(root, text="Reuse App", command=reuse)
-reuse_button.grid(row=10, column=1)
+clear_entries_button= tk.Button(root, text= "clear_entries", command= clear_entries)
+clear_entries_button.grid(row= 15)
 
-root.mainloop()
-import tkinter as tk
-from tkinter import messagebox
+print(root.mainloop())
 
-def calculate_bmi():
-    weight_kg = float(weight_entry.get())
-    height_m = float(height_entry.get())
-    bmi = weight_kg / (height_m ** 2)
-    bmi_label.config(text="Your BMI is: {:.2f}".format(bmi))
-
-def calculate_bmr():
-    weight_kg = float(weight_entry.get())
-    height_m = float(height_entry.get())
-    user_age = int(age_entry.get())
-    bmr = 88.362 + (13.397 * weight_kg) + (479.9 * height_m) - (5.677 * user_age)
-    bmr_label.config(text="Your BMR is: {:.2f}".format(bmr))
-
-def calculate_tdee():
-    bmr = float(bmr_label.cget("text").split(":")[1].strip())
-    activity_level = float(activity_entry.get())
-    tdee_result = bmr * activity_level
-    tdee_label.config(text="Your TDEE is: {:.2f}".format(tdee_result))
-
-def calculate_daily_calorie_needs():
-    weight_kg = float(weight_entry.get())
-    target_weight = float(target_weight_entry.get())
-    time_frame = int(time_frame_entry.get())
-
-    weight_loss = weight_kg - target_weight
-    calorie_deficit = weight_loss * 7700 / time_frame
-    daily_calorie_needs = 2000 - calorie_deficit / 7
-
-    if daily_calorie_needs <= 800:
-        calorie_needs_label.config(text="Your goal is too high, think more...")
-    else:
-        calorie_needs_label.config(text="Your daily calorie needs for weight loss are: {:.2f}".format(daily_calorie_needs))
-
-def reuse():
-    response = messagebox.askquestion("Confirmation", "Do you want to use the app again?")
-    if response == "yes":
-        clear_entries()
-        clear_labels()
-
-def clear_entries():
-    weight_entry.delete(0, tk.END)
-    height_entry.delete(0, tk.END)
-    age_entry.delete(0, tk.END)
-    target_weight_entry.delete(0, tk.END)
-    time_frame_entry.delete(0, tk.END)
-    activity_entry.delete(0, tk.END)
-
-def clear_labels():
-    bmi_label.config(text="")
-    bmr_label.config(text="")
-    tdee_label.config(text="")
-    calorie_needs_label.config(text="")
-
-root = tk.Tk()
-root.title("Fitness App")
-
-# Create labels, entry fields, and buttons (same as previous code)
-
-reuse_button = tk.Button(root, text="Reuse App", command=reuse)
-reuse_button.grid(row=10, column=1)
-
-import tkinter as tk
-from tkinter import messagebox
-
-def calculate_bmi():
-    weight_kg = float(weight_entry.get())
-    height_m = float(height_entry.get())
-    bmi = weight_kg / (height_m ** 2)
-    bmi_label.config(text="Your BMI is: {:.2f}".format(bmi))
-
-def calculate_bmr():
-    weight_kg = float(weight_entry.get())
-    height_m = float(height_entry.get())
-    user_age = int(age_entry.get())
-    bmr = 88.362 + (13.397 * weight_kg) + (479.9 * height_m) - (5.677 * user_age)
-    bmr_label.config(text="Your BMR is: {:.2f}".format(bmr))
-
-def calculate_tdee():
-    bmr = float(bmr_label.cget("text").split(":")[1].strip())
-    activity_level = float(activity_entry.get())
-    tdee_result = bmr * activity_level
-    tdee_label.config(text="Your TDEE is: {:.2f}".format(tdee_result))
-
-def calculate_daily_calorie_needs():
-    weight_kg = float(weight_entry.get())
-    target_weight = float(target_weight_entry.get())
-    time_frame = int(time_frame_entry.get())
-
-    weight_loss = weight_kg - target_weight
-    calorie_deficit = weight_loss * 7700 / time_frame
-    daily_calorie_needs = 2000 - calorie_deficit / 7
-
-    if daily_calorie_needs <= 800:
-        calorie_needs_label.config(text="Your goal is too high, think more...")
-    else:
-        calorie_needs_label.config(text="Your daily calorie needs for weight loss are: {:.2f}".format(daily_calorie_needs))
-
-def reuse():
-    response = messagebox.askquestion("Confirmation", "Do you want to use the app again?")
-    if response == "yes":
-        clear_entries()
-        clear_labels()
-
-def clear_entries():
-    weight_entry.delete(0, tk.END)
-    height_entry.delete(0, tk.END)
-    age_entry.delete(0, tk.END)
-    target_weight_entry.delete(0, tk.END)
-    time_frame_entry.delete(0, tk.END)
-    activity_entry.delete(0, tk.END)
-
-def clear_labels():
-    bmi_label.config(text="")
-    bmr_label.config(text="")
-    tdee_label.config(text="")
-    calorie_needs_label.config(text="")
-
-root = tk.Tk()
-root.title("Fitness App")
-
-# Create labels, entry fields, and buttons (same as previous code)
-
-reuse_button = tk.Button(root, text="Reuse App", command=reuse)
-reuse_button.grid(row=10, column=1)
-
-root.mainloop()
 
